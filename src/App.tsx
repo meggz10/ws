@@ -128,7 +128,7 @@ class App extends React.Component<
     ////this.socket.on("on-connected", (heroes: any) => {
       ////console.log("heroes", heroes);
       ////this.setState({ heroes });
-    	this.socket = io.connect("https://myrot-socket-io04.herokuapp.com"); //nuestro server local www.myrot.pa:5001
+    	this.socket = io.connect("https://myrot-socket-io01.herokuapp.com"); //nuestro server local www.myrot.pa:5001
     	this.socket.on("on-connected", (heroes: any) => {
      	 console.log("heroes", heroes);
       	 this.setState({ heroes });
