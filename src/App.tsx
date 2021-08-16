@@ -128,7 +128,7 @@ class App extends React.Component<
     ////this.socket.on("on-connected", (heroes: any) => {
       ////console.log("heroes", heroes);
       ////this.setState({ heroes });
-    	this.socket = io.connect("https://myrot-socket-io01.herokuapp.com"); //nuestro server local www.myrot.pa:5001
+    	this.socket = io.connect("https://myrot-socket-io04.herokuapp.com"); //nuestro server local www.myrot.pa:5001
     	this.socket.on("on-connected", (heroes: any) => {
      	 console.log("heroes", heroes);
       	 this.setState({ heroes });
@@ -340,15 +340,23 @@ setearIndicadormic_off = ()  => {
 
   MicButton_Turnall = () => {
 
+    var x = document.getElementById("mic_on");
+    var y = document.getElementById("mic_off");
+
     this.localStream.getAudioTracks().forEach(function(track) {
       
 
       if (track.enabled == false)
       {
         track.enabled = true;
+        y.style.display = "none";
+      x.style.display = "block";
       }
       else{
         track.enabled = false;
+
+        y.style.display = "block";
+      x.style.display = "none";
 
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
@@ -359,6 +367,17 @@ setearIndicadormic_off = ()  => {
     };
     xhttp.open("GET", 'https://myrot-control-eventos01.herokuapp.com/mic_apagar', true);
     xhttp.send();
+
+
+    
+    
+    if (y.style.display == "none")
+    {
+      
+    }
+    else{
+      
+    }
 
 
       }
@@ -431,6 +450,24 @@ setearIndicadormic_off = ()  => {
     xhttp.open("GET", 'https://myrot-control-eventos01.herokuapp.com/face8', true);
     xhttp.send();
   }
+
+  cambiaricono_mic = () => {
+              
+    var x = document.getElementById("mic_on");
+    var y = document.getElementById("mic_off");
+    
+    if (y.style.display == "none")
+    {
+      y.style.display = "block";
+      x.style.display = "none";
+    }
+    else{
+      y.style.display = "none";
+      x.style.display = "block";
+    }
+
+  }
+
 
   render() {
     const {
@@ -652,13 +689,22 @@ setearIndicadormic_off = ()  => {
 <div className="styling col-30">
 
 <button
+            
             className="ma-left-20 btn-v2 bg-blue icon-video-position"
             type="button"
             onClick={this.MicButton_Turnall}
           >
-            <i className="material-icons f-40">mic</i>
+            
+            <i id="mic_on" className="material-icons f-40">mic</i>
+            <i id="mic_off" className="material-icons f-40">mic_off</i>
+           
           </button>
 
+
+          
+            
+
+         
 
 
           <button
