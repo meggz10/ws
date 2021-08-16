@@ -1,7 +1,18 @@
 import React from "react";
+import toast, { Toaster } from 'react-hot-toast';
 import io from "socket.io-client";
 import "./app.scss";
+import "./main.scss";
 import "./dina.scss";
+import "./assets/css/CssMain.css"
+import * as recordingUtils from "./js/recordingUtils.js";
+import * as ui from "./js/ui.js";
+import * as main from "./js/main.js";
+import * as store from "./js/store.js";
+import * as wss from "./js/wss.js";
+import * as webRTCHandler from "./js/webRTCHandler.js";
+import * as constants from "./js/constants.js";
+
 
 require("webrtc-adapter"); // suport for diferent browsers
 
@@ -43,6 +54,10 @@ class App extends React.Component<
     status: Status.default,
   };
 
+
+  
+
+  
   createPeer() {
     this.pc = new RTCPeerConnection({
       iceServers: [
@@ -69,6 +84,8 @@ class App extends React.Component<
         });
       }
     });
+
+ 
 
     this.pc!.addEventListener("track", (event) => {
       // we received a media stream from the other person. as we're sure
@@ -98,8 +115,8 @@ class App extends React.Component<
       .then((stream: MediaStream) => {
         this.localStream = stream;
         // play our local stream
-        this.localVideo!.srcObject = this.localStream;
-        this.localVideo!.play();
+        //this.localVideo!.srcObject = this.localStream;
+        //this.localVideo!.play();
 
         this.connect();
       });
@@ -111,7 +128,7 @@ class App extends React.Component<
     ////this.socket.on("on-connected", (heroes: any) => {
       ////console.log("heroes", heroes);
       ////this.setState({ heroes });
-    	this.socket = io.connect("https://myrot-socket-io.herokuapp.com"); //nuestro server local www.myrot.pa:5001
+    	this.socket = io.connect("https://myrot-socket-io01.herokuapp.com"); //nuestro server local www.myrot.pa:5001
     	this.socket.on("on-connected", (heroes: any) => {
      	 console.log("heroes", heroes);
       	 this.setState({ heroes });
@@ -135,6 +152,9 @@ class App extends React.Component<
         return { heroes };
       });
     });
+
+    
+
 
     this.socket!.on("on-disconnected", (heroName: string) => {
       this.pc = null;
@@ -212,6 +232,8 @@ class App extends React.Component<
     });
   }
 
+  notify = () => toast('Here is your toast.');
+
   callTo = async (superHeroName: string) => {
     const { heroes } = this.state;
     this.createPeer();
@@ -253,6 +275,162 @@ class App extends React.Component<
     this.setState({ status: Status.default, him: null });
     this.pc = null;
   };
+  
+  
+  setearIndicadormic = ()  => {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        document.getElementById("demo").innerHTML =
+        this.responseText;
+      }
+    };
+    xhttp.open("GET", 'https://myrot-control-eventos01.herokuapp.com/mic', true);
+    xhttp.send();
+  }
+
+setearIndicadormic_off = ()  => {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        document.getElementById("demo").innerHTML =
+        this.responseText;
+      }
+    };
+    xhttp.open("GET", 'https://myrot-control-eventos01.herokuapp.com/mic_apagar', true);
+    xhttp.send();
+  }
+
+  setearIndicador1 = ()  => {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        document.getElementById("demo").innerHTML =
+        this.responseText;
+      }
+    };
+    xhttp.open("GET", 'https://myrot-control-eventos01.herokuapp.com/face1', true);
+    xhttp.send();
+  }
+
+  setearIndicador2 = ()  => {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        document.getElementById("demo").innerHTML =
+        this.responseText;
+      }
+    };
+    xhttp.open("GET", 'https://myrot-control-eventos01.herokuapp.com/face2', true);
+    xhttp.send();
+  }
+
+  setearIndicador3 = ()  => {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        document.getElementById("demo").innerHTML =
+        this.responseText;
+      }
+    };
+    xhttp.open("GET", 'https://myrot-control-eventos01.herokuapp.com/face3', true);
+    xhttp.send();
+  }
+
+
+  MicButton_Turnall = () => {
+
+    this.localStream.getAudioTracks().forEach(function(track) {
+      
+
+      if (track.enabled == false)
+      {
+        track.enabled = true;
+      }
+      else{
+        track.enabled = false;
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        document.getElementById("demo").innerHTML =
+        this.responseText;
+      }
+    };
+    xhttp.open("GET", 'https://myrot-control-eventos01.herokuapp.com/mic_apagar', true);
+    xhttp.send();
+
+
+      }
+
+      console.log(track.enabled);
+
+    });
+
+  
+  } 
+
+
+  setearIndicador4 = ()  => {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        document.getElementById("demo").innerHTML =
+        this.responseText;
+      }
+    };
+    xhttp.open("GET", 'https://myrot-control-eventos01.herokuapp.com/face4', true);
+    xhttp.send();
+  }
+
+
+ setearIndicador5 = ()  => {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        document.getElementById("demo").innerHTML =
+        this.responseText;
+      }
+    };
+    xhttp.open("GET", 'https://myrot-control-eventos01.herokuapp.com/face5', true);
+    xhttp.send();
+  }
+
+  setearIndicador6 = ()  => {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        document.getElementById("demo").innerHTML =
+        this.responseText;
+      }
+    };
+    xhttp.open("GET", 'https://myrot-control-eventos01.herokuapp.com/face6', true);
+    xhttp.send();
+  }
+
+  setearIndicador7 = ()  => {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        document.getElementById("demo").innerHTML =
+        this.responseText;
+      }
+    };
+    xhttp.open("GET", 'https://myrot-control-eventos01.herokuapp.com/face7', true);
+    xhttp.send();
+  }
+
+  setearIndicador8 = ()  => {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        document.getElementById("demo").innerHTML =
+        this.responseText;
+      }
+    };
+    xhttp.open("GET", 'https://myrot-control-eventos01.herokuapp.com/face8', true);
+    xhttp.send();
+  }
 
   render() {
     const {
@@ -278,7 +456,7 @@ class App extends React.Component<
           style={{ zIndex: 99 }}
         />
 
-        <div className="d-flex">
+        <div className="center-flex">
           <video
             id="remote-video"
             ref={(ref) => (this.remoteVideo = ref)}
@@ -300,21 +478,87 @@ class App extends React.Component<
                   .map((key) => {
                     const hero = (heroes as any)[key];
                     return (
-                      <div
+                     
+<div className="Home_General">
+<div
                         className="item-hero"
                         key={key}
                         style={{ opacity: hero.isTaken ? 1 : 0.3 }}
                       >
-                        <img className="avatar" src={hero.avatar} />
-                        <h3 className="c-white">{hero.name}</h3>
-                        <button
+
+
+    
+
+<div className="container">
+
+
+  <div className="interior">
+
+
+    <a  href="#open-modal">
+                     <img className="avatar-cirle" src={hero.avatar}/></a>
+
+
+  </div>
+</div>
+
+
+<div id="open-modal" className="modal-window">
+
+  <div className="pfp-space">
+
+    <a href="#" title="Close" className="modal-close">Close</a>
+ 
+    <img className="avatar-cirle-card" src={hero.avatar} />
+
+    <h1>{hero.name}</h1>
+    
+   
+    <h2>Terapeuta</h2>
+
+    
+  <div className="profile-bio">
+    
+    <p>"Todos somos MyRoT"</p>
+    
+  </div>
+
+  <div>
+
+  <button
                           type="button"
                           className="btn bg-red"
                           onClick={() => this.callTo(hero.name)}
                         >
                           <i className="material-icons f-40">call</i>
                         </button>
+
+                       
+
+  </div>
+
+
+    </div>
+
+
+</div>
+
+
+
+
+
+
+                      
+
+                      
+
+                        
                       </div>
+
+
+</div>
+
+
                     );
                   })}
               </div>
@@ -325,7 +569,7 @@ class App extends React.Component<
         {!me && (
           <div id="picker" className="d-flex ai-center jc-center t-center">
             <div>
-              <h3 className="c-white f-20 uppercase">Seleccionar Terapeuta</h3>
+              <h3 className="c-white f-20 uppercase">Seleccionar--Operador</h3>
               <div className="d-flex">
                 {heroes &&
                   Object.keys(heroes!).map((key) => {
@@ -386,6 +630,7 @@ class App extends React.Component<
             style={{ zIndex: 99 }}
           >
             <img className="avatar" src={him.avatar} />
+     
             <button
               className="ma-top-30 btn bg-red"
               type="button"
@@ -400,20 +645,134 @@ class App extends React.Component<
         )}
 
         {status === Status.inCalling && (
-          <div
-            className="fixed left-0 right-0 bottom-30  d-flex ai-center jc-center"
-            style={{ zIndex: 99 }}
+  
+
+ /*fixed left-0 right-0 bottom-0 d-flex-general ai-center jc-center*/
+          
+<div className="styling col-30">
+
+<button
+            className="ma-left-20 btn-v2 bg-blue icon-video-position"
+            type="button"
+            onClick={this.MicButton_Turnall}
           >
-            <button
-              className="ma-left-20 btn bg-red"
-              type="button"
-              onClick={this.finishCall}
-            >
-              <i className="material-icons f-40">call_end</i>
-            </button>
-          </div>
+            <i className="material-icons f-40">mic</i>
+          </button>
+
+
+
+          <button
+            className="ma-left-20 btn-v2 bg-red icon-video-position"
+            type="button"
+            onClick={this.finishCall}
+          >
+            <i className="material-icons f-40">call_end</i>
+          </button>
+          
+          <button
+            className="ma-left-20 btns btn-1 btns-img-1"
+            type="button"
+            onClick={this.setearIndicador1}
+            
+          >
+
+     <i className="mdi-emoticon-happy-outline"></i>
+
+          </button>
+
+        
+          <button
+            className="ma-left-20 btns btn-2 btns-img-2"
+            type="button"
+            onClick={this.setearIndicador2}
+          >
+            <i className="mdi-emoticon-happy-outline"></i>
+          </button>
+
+
+        
+
+          <button
+            className="ma-left-20 btns btn-3 btns-img-3"
+            type="button"
+            onClick={this.setearIndicador3}
+          >
+            <i className="mdi-emoticon-happy-outline"></i>
+          </button>
+
+   
+          <button
+            className="ma-left-20 btns btn-4 btns-img-4"
+            type="button"
+            onClick={this.setearIndicador4}
+          >
+            <i className="mdi-emoticon-happy-outline"></i>
+          </button>
+
+  
+
+          <hr className="line-space"></hr>
+
+          <button
+            className="ma-left-20 btns btn-center btns-img-center"
+            type="button"
+            onClick={this.setearIndicadormic}
+          >
+            <i className="mdi-emoticon-happy-outline"></i>
+          </button>
+
+
+          <hr className="line-space"></hr>
+          
+          <button
+            className="ma-left-20 btns btn-5 btns-img-5"
+            type="button"
+            onClick={this.setearIndicador5}
+          >
+            <i className="mdi-emoticon-happy-outline"></i>
+          </button>
+
+          <button
+            className="ma-left-20 btns btn-6 btns-img-6"
+            type="button"
+            onClick={this.setearIndicador6}
+          >
+            <i className="mdi-emoticon-happy-outline"></i>
+          </button>
+
+        
+
+          <button
+            className="ma-left-20 btns btn-7 btns-img-7"
+            type="button"
+            onClick={this.setearIndicador7}
+          >
+            <i className="mdi-emoticon-happy-outline"></i>
+          </button>
+
+       
+
+          <button
+            
+            className="ma-left-20 btns btn-8 btns-img-8"
+            type="button"
+            onClick={this.setearIndicador8}
+          >
+            <i className="mdi-emoticon-happy-outline"></i>
+
+          </button>
+
+  
+</div>
+
+
+
+
         )}
       </div>
+
+
+
     );
   }
 }

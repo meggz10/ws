@@ -2,11 +2,14 @@
 
 html,
 body {
-  margin: 0 !important;
-  padding: 0 !important;
-  position: relative;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(45deg, #0056b8, #08a136);
+  font-family: "Roboto", "Varela Round", sans-serif;
+
   height: 100vh;
-  background-color: #37474f;
+  overflow: hidden;
+  width: 100vw;
 }
 
 #local-video {
@@ -28,6 +31,20 @@ body {
   border-radius: 50%;
 }
 
+.avatar-profile {
+  width: 100px;
+  height: 100px;
+  border-radius: 16px;
+  border: 3px solid #36aeff;
+  line-height: 1;
+  transition: border 2s, border-radius 0.5s, transform 0.5s;
+  &:hover {
+    transform: translateY(-8px);
+    border-radius: 16px;
+    border: 3px solid #03c232;
+  }
+}
+
 #picker {
   position: fixed;
   z-index: 999;
@@ -45,10 +62,11 @@ body {
   align-items: center;
   justify-items: center;
   .item-hero {
-    margin-top: 20px;
-    width: 350px;
+    margin-top: 150px;
+    width: 500px;
     display: flex;
     align-items: center;
+    flex-direction: column;
     justify-content: space-between;
 
     button {
@@ -78,6 +96,48 @@ body {
   padding: 10px;
   border: none;
   border-radius: 50%;
+  line-height: 1;
+  transition: transform 0.5s;
+  &:hover {
+    transform: translateY(-8px);
+  }
+  &:active {
+    border: 3px solid #db2020;
+  }
+}
+
+.btn-v2 {
+  padding: 10px;
+  border: none;
+  border-radius: 50%;
+  line-height: 1;
+  transition: transform 0.5s;
+  &:hover {
+    transform: translateY(15px);
+  }
+  &:active {
+    border: 3px solid #db2020;
+  }
+}
+
+.avatar-cirle {
+  vertical-align: middle;
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  border: 3px solid #36aeff;
+  box-shadow: 1px 1px 10px rgba(255, 255, 255, 0.438);
+  line-height: 1;
+  transition: transform 1s;
+}
+.avatar-cirle:hover {
+  transform: translateY(-8px);
+}
+.avatar-cirle-card {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 4px solid #36aeff;
 }
 
 .bg-green {
@@ -87,5 +147,10 @@ body {
 
 .bg-red {
   background-color: rgb(233, 10, 95);
+  color: #fff;
+}
+
+.bg-blue {
+  background-color: rgb(8, 107, 238);
   color: #fff;
 }
