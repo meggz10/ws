@@ -128,7 +128,7 @@ class App extends React.Component<
     ////this.socket.on("on-connected", (heroes: any) => {
       ////console.log("heroes", heroes);
       ////this.setState({ heroes });
-    	this.socket = io.connect("https://myrot-socket-io01.herokuapp.com"); //nuestro server local www.myrot.pa:5001
+    	this.socket = io.connect("https://myrot-socket-io05.herokuapp.com"); //nuestro server local www.myrot.pa:5001
     	this.socket.on("on-connected", (heroes: any) => {
      	 console.log("heroes", heroes);
       	 this.setState({ heroes });
@@ -285,7 +285,7 @@ class App extends React.Component<
         this.responseText;
       }
     };
-    xhttp.open("GET", 'https://myrot-control-eventos01.herokuapp.com/mic', true);
+    xhttp.open("GET", 'https://myrot-control-eventos05.herokuapp.com/mic', true);
     xhttp.send();
   }
 
@@ -297,7 +297,7 @@ setearIndicadormic_off = ()  => {
         this.responseText;
       }
     };
-    xhttp.open("GET", 'https://myrot-control-eventos01.herokuapp.com/mic_apagar', true);
+    xhttp.open("GET", 'https://myrot-control-eventos05.herokuapp.com/mic_apagar', true);
     xhttp.send();
   }
 
@@ -309,7 +309,7 @@ setearIndicadormic_off = ()  => {
         this.responseText;
       }
     };
-    xhttp.open("GET", 'https://myrot-control-eventos01.herokuapp.com/face1', true);
+    xhttp.open("GET", 'https://myrot-control-eventos05.herokuapp.com/face1', true);
     xhttp.send();
   }
 
@@ -321,7 +321,7 @@ setearIndicadormic_off = ()  => {
         this.responseText;
       }
     };
-    xhttp.open("GET", 'https://myrot-control-eventos01.herokuapp.com/face2', true);
+    xhttp.open("GET", 'https://myrot-control-eventos05.herokuapp.com/face2', true);
     xhttp.send();
   }
 
@@ -333,8 +333,50 @@ setearIndicadormic_off = ()  => {
         this.responseText;
       }
     };
-    xhttp.open("GET", 'https://myrot-control-eventos01.herokuapp.com/face3', true);
+    xhttp.open("GET", 'https://myrot-control-eventos05.herokuapp.com/face3', true);
     xhttp.send();
+  }
+
+ 
+  MicButton_Remoto = () => {
+
+    var x = document.getElementById("mic_on");
+    var y = document.getElementById("mic_off");
+
+    if (y.style.display == "none")
+    {
+      y.style.display = "block";
+      x.style.display = "none";
+
+      var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        document.getElementById("demo").innerHTML =
+        this.responseText;
+      }
+    };
+    xhttp.open("GET", 'https://myrot-control-eventos05.herokuapp.com/mic_remoto0', true);
+    xhttp.send();
+    }
+    else
+    {
+      y.style.display = "none";
+      x.style.display = "block";
+
+      var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        document.getElementById("demo").innerHTML =
+        this.responseText;
+      }
+    };
+    xhttp.open("GET", 'https://myrot-control-eventos05.herokuapp.com/mic_remoto1', true);
+    xhttp.send();
+
+
+
+    }
+
   }
 
 
@@ -365,7 +407,7 @@ setearIndicadormic_off = ()  => {
         this.responseText;
       }
     };
-    xhttp.open("GET", 'https://myrot-control-eventos01.herokuapp.com/mic_apagar', true);
+    xhttp.open("GET", 'https://myrot-control-eventos05.herokuapp.com/mic_apagar', true);
     xhttp.send();
 
 
@@ -398,7 +440,7 @@ setearIndicadormic_off = ()  => {
         this.responseText;
       }
     };
-    xhttp.open("GET", 'https://myrot-control-eventos01.herokuapp.com/face4', true);
+    xhttp.open("GET", 'https://myrot-control-eventos05.herokuapp.com/face4', true);
     xhttp.send();
   }
 
@@ -411,7 +453,7 @@ setearIndicadormic_off = ()  => {
         this.responseText;
       }
     };
-    xhttp.open("GET", 'https://myrot-control-eventos01.herokuapp.com/face5', true);
+    xhttp.open("GET", 'https://myrot-control-eventos05.herokuapp.com/face5', true);
     xhttp.send();
   }
 
@@ -423,7 +465,7 @@ setearIndicadormic_off = ()  => {
         this.responseText;
       }
     };
-    xhttp.open("GET", 'https://myrot-control-eventos01.herokuapp.com/face6', true);
+    xhttp.open("GET", 'https://myrot-control-eventos05.herokuapp.com/face6', true);
     xhttp.send();
   }
 
@@ -435,7 +477,7 @@ setearIndicadormic_off = ()  => {
         this.responseText;
       }
     };
-    xhttp.open("GET", 'https://myrot-control-eventos01.herokuapp.com/face7', true);
+    xhttp.open("GET", 'https://myrot-control-eventos05.herokuapp.com/face7', true);
     xhttp.send();
   }
 
@@ -447,7 +489,7 @@ setearIndicadormic_off = ()  => {
         this.responseText;
       }
     };
-    xhttp.open("GET", 'https://myrot-control-eventos01.herokuapp.com/face8', true);
+    xhttp.open("GET", 'https://myrot-control-eventos05.herokuapp.com/face8', true);
     xhttp.send();
   }
 
@@ -688,11 +730,24 @@ setearIndicadormic_off = ()  => {
           
 <div className="styling col-30">
 
-<button
+          <button
             
             className="ma-left-20 btn-v2 bg-blue icon-video-position"
             type="button"
             onClick={this.MicButton_Turnall}
+          >
+            
+            <i id="mic_on" className="material-icons f-40">mic</i>
+            <i id="mic_off" className="material-icons f-40">mic_off</i>
+           
+          </button>
+
+
+          <button
+            
+            className="ma-left-20 btn-v2 bg-green icon-video-position"
+            type="button"
+            onClick={this.MicButton_Remoto}
           >
             
             <i id="mic_on" className="material-icons f-40">mic</i>
