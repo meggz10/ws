@@ -340,8 +340,8 @@ setearIndicadormic_off = ()  => {
  
   MicButton_Remoto = () => {
 
-    var x = document.getElementById("mic_on");
-    var y = document.getElementById("mic_off");
+    var x = document.getElementById("mic_on1");
+    var y = document.getElementById("mic_off1");
 
     if (y.style.display == "none")
     {
@@ -750,8 +750,8 @@ setearIndicadormic_off = ()  => {
             onClick={this.MicButton_Remoto}
           >
             
-            <i id="mic_on" className="material-icons f-40">mic</i>
-            <i id="mic_off" className="material-icons f-40">mic_off</i>
+            <i id="mic_on1" className="material-icons f-40">mic</i>
+            <i id="mic_off1" className="material-icons f-40">mic_off</i>
            
           </button>
 
